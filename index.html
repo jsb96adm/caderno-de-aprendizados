@@ -3,70 +3,216 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>O que eu tenho aprendido · Jean Barbosa</title>
-<meta name="description" content="Caderno de aprendizados de Jean Barbosa: frases, pensamentos e perguntas de quem está aprendendo a anotar.">
-<meta property="og:title" content="O que eu tenho aprendido · Caderno de aprendizados">
-<meta property="og:description" content="Frases, pensamentos e perguntas de quem está aprendendo a anotar.">
-<meta property="og:image" content="image.png">
+<title>Cadernos de reflexão · Jean Barbosa</title>
+<meta name="description" content="Três cadernos de Jean Barbosa para ler online ou baixar em PDF: O que eu tenho aprendido, Anotei porque ficou e Antes de ser visto.">
+<meta property="og:title" content="Cadernos de reflexão · Jean Barbosa">
+<meta property="og:description" content="Três cadernos para quem anota o que atravessa. Leia online ou baixe em PDF.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://jsb96adm.github.io/caderno-de-aprendizados/image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Lora:wght@500;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --vinho:#5B1F2D; --creme:#F7EDE4; --ouro:#E8AF2E; --terra:#C8532A; --tinta:#2B1B20;
+    --tinta:#1E1622; --papel:#F7EDE4; --papel-2:#EFE0D3; --texto:#2B1B20;
+    --fita:#E8AF2E; --risco:#C8532A;
   }
   *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth}
   body{
-    background:var(--vinho); color:var(--creme);
+    background:var(--tinta); color:var(--papel);
     font-family:'Lora',Georgia,serif; min-height:100vh;
-    display:flex; align-items:center; justify-content:center; padding:32px 16px;
+    padding:56px 24px 40px 88px; position:relative;
   }
-  main{
-    width:100%; max-width:880px;
-    display:grid; grid-template-columns:minmax(0,300px) 1fr; gap:48px; align-items:center;
+  /* furos de fichário: assinatura do caderno */
+  body::before{
+    content:""; position:absolute; left:30px; top:0; bottom:0; width:22px;
+    background:radial-gradient(circle at 11px 11px,#0f0a12 0 10px,transparent 11px) 0 0/22px 33vh repeat-y;
+    opacity:.9; pointer-events:none;
   }
-  .capa{
-    display:block; width:100%; border-radius:6px;
-    box-shadow:0 18px 40px rgba(0,0,0,.45); transform:rotate(-2deg);
+  .wrap{max-width:1080px;margin:0 auto}
+
+  /* cabeçalho */
+  header{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:end;margin-bottom:56px}
+  .etiqueta{
+    position:relative; background:var(--papel); color:var(--texto);
+    padding:22px 28px 16px; border-radius:3px; transform:rotate(-2deg);
+    box-shadow:0 12px 28px rgba(0,0,0,.45); min-width:250px;
+  }
+  .etiqueta::before{
+    content:""; position:absolute; top:-14px; left:18px; width:96px; height:26px; transform:rotate(-4deg);
+    background:repeating-linear-gradient(135deg,var(--fita) 0 7px,#f2c04f 7px 14px); opacity:.92;
+  }
+  .etiqueta small{display:block;font-family:'Poppins',sans-serif;font-weight:600;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--risco)}
+  .etiqueta strong{display:block;font-family:'Caveat',cursive;font-size:34px;line-height:1.1;margin:6px 0 8px;font-weight:600}
+  .etiqueta i{display:block;height:1px;background:#d9c8b8;margin-top:6px}
+  h1{font-size:clamp(34px,5.6vw,58px);line-height:1.06;font-weight:700}
+  h1 em{font-style:normal;color:var(--fita)}
+  .sub{font-family:'Caveat',cursive;font-size:27px;line-height:1.2;color:#f1dccd;margin-top:12px;max-width:34ch}
+  .onda{display:block;width:140px;height:14px;margin:16px 0 0;color:var(--risco)}
+
+  /* cartões */
+  .estante{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+  .cartao{
+    --bg:#5B1F2D; --acc:#E8AF2E; --soft:#f1dccd;
+    background:var(--bg); border-radius:10px; padding:22px 22px 24px;
+    display:flex; flex-direction:column; position:relative;
+    box-shadow:0 18px 38px rgba(0,0,0,.4); border:1px solid rgba(255,255,255,.07);
     transition:transform .2s;
   }
-  .capa:hover{transform:rotate(0)}
-  .tag{font-family:'Poppins',sans-serif; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--terra); font-weight:600}
-  h1{font-size:clamp(34px,6vw,52px); line-height:1.08; margin:14px 0 12px}
-  h1 span{color:var(--ouro)}
-  .sub{font-family:'Caveat',cursive; font-size:26px; line-height:1.2; margin-bottom:30px; color:#f1dccd}
-  .botoes{display:flex; flex-wrap:wrap; gap:12px}
+  .cartao:nth-child(1){--bg:#5B1E2D;--acc:#E8AF2E}
+  .cartao:nth-child(2){--bg:#35214A;--acc:#F6D26B}
+  .cartao:nth-child(3){--bg:#17424F;--acc:#F4A08A}
+  .cartao:hover{transform:translateY(-4px)}
+  .capa-link{display:block;margin:0 auto 20px;width:72%}
+  .capa{
+    --papel:#F7EDE4; container-type:inline-size; position:relative; width:100%; aspect-ratio:408/579;
+    background:var(--bg); border-radius:4px; overflow:hidden; color:var(--papel);
+    box-shadow:0 12px 26px rgba(0,0,0,.5); transform:rotate(-2deg); transition:transform .2s;
+  }
+  .cartao:nth-child(2) .capa{transform:rotate(1.6deg)}
+  .capa-link:hover .capa,.capa-link:focus-visible .capa{transform:rotate(0)}
+  .capa .furo{position:absolute;left:3.4cqw;width:3.8cqw;height:3.8cqw;border-radius:50%;background:rgba(0,0,0,.32)}
+  .capa .furo:nth-of-type(1){top:19cqw}.capa .furo:nth-of-type(2){top:70cqw}.capa .furo:nth-of-type(3){top:114cqw}
+  .capa .rot{position:absolute;left:11cqw;top:17cqw;width:46cqw;padding:3.4cqw 3.6cqw 2.6cqw;background:var(--papel);color:var(--texto);transform:rotate(-3deg);border-radius:.6cqw;box-shadow:0 1cqw 2.4cqw rgba(0,0,0,.35)}
+  .capa .rot::before{content:"";position:absolute;top:-3.4cqw;left:-3.5cqw;width:19cqw;height:5.4cqw;transform:rotate(-6deg);background:repeating-linear-gradient(135deg,var(--fita2) 0 2cqw,var(--fita1) 2cqw 4cqw);opacity:.9}
+  .capa .rot small{display:block;font-family:'Poppins',sans-serif;font-weight:600;font-size:1.9cqw;letter-spacing:.2em;text-transform:uppercase;color:var(--risco)}
+  .capa .rot b{display:block;font-family:'Caveat',cursive;font-weight:600;font-size:6.2cqw;line-height:1.1;margin:.8cqw 0 1.6cqw}
+  .capa .rot i{display:block;height:1px;background:#d9c8b8;margin-top:1.1cqw}
+  .capa .nota{position:absolute;right:7cqw;top:14cqw;width:21cqw;padding:3cqw 2.6cqw 3.4cqw;background:var(--nota);color:#2a2230;transform:rotate(3deg);box-shadow:0 1cqw 2.4cqw rgba(0,0,0,.3);font-family:'Caveat',cursive;font-weight:600;font-size:3.4cqw;line-height:1.15}
+  .capa .nota small{display:block;font-family:'Poppins',sans-serif;font-weight:600;font-size:1.7cqw;letter-spacing:.2em;text-transform:uppercase;opacity:.7;margin-bottom:.6cqw}
+  .capa .nota strong{display:block;font-size:8cqw;line-height:1}
+  .capa .spark{position:absolute;left:64cqw;top:42cqw;font-size:8cqw;line-height:1;color:var(--acc)}
+  .capa .spark.p{left:20cqw;top:136cqw;font-size:5cqw;opacity:.85}
+  .capa .texto{position:absolute;left:11cqw;top:52cqw;width:50cqw}
+  .capa .sup{display:block;white-space:nowrap;font-family:'Poppins',sans-serif;font-weight:600;font-size:1.6cqw;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:3cqw}
+  .capa .tit{font-family:'Lora',Georgia,serif;font-weight:700;font-size:9.6cqw;line-height:1.06}
+  .capa .tit span{color:var(--acc);display:block}
+  .capa .ond{display:block;width:40cqw;height:4cqw;margin:4cqw 0 4cqw;color:var(--ondac)}
+  .capa .leg{font-family:'Caveat',cursive;font-weight:600;font-size:4.4cqw;line-height:1.15;color:#f1dccd;width:42cqw}
+  .capa .rod{position:absolute;left:11cqw;bottom:7cqw;font-family:'Poppins',sans-serif;font-weight:600;font-size:1.6cqw;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,237,228,.6);line-height:1.6}
+  .capa .arco{position:absolute;right:0;bottom:0;width:46cqw;height:52cqw;border-radius:23cqw 23cqw 0 0;background:var(--arco)}
+  .capa .disco{position:absolute;border-radius:50%}
+  .capa .furoc{position:absolute;border-radius:50%}
+  /* volume 1: círculos concêntricos */
+  .c1 .disco.g{width:60cqw;height:60cqw;right:-22cqw;bottom:6cqw;background:#C8532A}
+  .c1 .disco.m{width:36cqw;height:36cqw;right:-6cqw;bottom:18cqw;background:#E8AF2E}
+  /* volumes 2 e 3: arco com disco e furo */
+  .c2 .disco.g,.c3 .disco.g{width:30cqw;height:30cqw;right:8cqw;bottom:14cqw}
+  .c2 .furoc,.c3 .furoc{width:12cqw;height:12cqw;right:17cqw;bottom:23cqw}
+  .c1{--fita1:#f2c04f;--fita2:#E8AF2E;--nota:#F4C6B6;--ondac:#C8532A}
+  .c2{--fita1:#f2c04f;--fita2:#E8AF2E;--nota:#D9CCEF;--ondac:#C9B6E6;--arco:#C9B6E6}
+  .c3{--fita1:#f4a08a;--fita2:#e98e78;--nota:#D3E4EA;--ondac:#9FC3CD;--arco:#9FC3CD}
+  .c2 .disco.g{background:#F6D26B}.c2 .furoc{background:#20142B}
+  .c3 .disco.g{background:#F4A08A}.c3 .furoc{background:#11262E}
+  .tag{font-family:'Poppins',sans-serif;font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc)}
+  .cartao h2{font-size:27px;line-height:1.1;margin:8px 0 8px;font-weight:700}
+  .cartao h2 span{color:var(--acc)}
+  .cartao p{font-family:'Caveat',cursive;font-size:22px;line-height:1.2;color:var(--soft);margin-bottom:6px}
+  .meta{font-family:'Poppins',sans-serif;font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,237,228,.6);margin:6px 0 20px}
+  .botoes{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto}
   a.btn{
-    font-family:'Poppins',sans-serif; font-size:14px; font-weight:600; text-decoration:none;
-    padding:14px 24px; border-radius:999px; display:inline-block;
+    font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;text-decoration:none;
+    padding:12px 20px;border-radius:999px;display:inline-block;transition:background .15s,color .15s;
   }
-  .ler{background:var(--ouro); color:var(--tinta)}
-  .baixar{border:2px solid var(--creme); color:var(--creme)}
-  .ler:hover{background:#f2c04f}
-  .baixar:hover{background:var(--creme); color:var(--vinho)}
-  .assinatura{margin-top:34px; font-family:'Caveat',cursive; font-size:24px; color:var(--ouro)}
-  @media (max-width:720px){
-    main{grid-template-columns:1fr; gap:32px; text-align:center}
-    .capa{max-width:240px; margin:0 auto}
-    .botoes{justify-content:center}
+  .ler{background:var(--acc);color:#241419}
+  .ler:hover{filter:brightness(1.08)}
+  .baixar{border:2px solid var(--papel);color:var(--papel)}
+  .baixar:hover{background:var(--papel);color:var(--bg)}
+  a:focus-visible{outline:3px solid var(--papel);outline-offset:3px}
+
+  footer{margin-top:56px;display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center}
+  footer .lema{font-family:'Poppins',sans-serif;font-weight:600;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(247,237,228,.55)}
+  footer .assina{font-family:'Caveat',cursive;font-size:26px;color:var(--fita)}
+
+  @media (max-width:980px){
+    .estante{grid-template-columns:repeat(2,minmax(0,1fr))}
+    header{grid-template-columns:1fr;gap:28px}
   }
+  @media (max-width:640px){
+    body{padding:36px 16px 32px}
+    body::before{display:none}
+    .estante{grid-template-columns:1fr}
+    .capa-link{width:58%}
+    .etiqueta{min-width:0;width:100%;max-width:300px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<main>
-  <a href="o-que-eu-tenho-aprendido.pdf" aria-label="Abrir o caderno em PDF">
-    <img class="capa" src="image.png" alt="Capa do caderno O que eu tenho aprendido">
-  </a>
-  <section>
-    <p class="tag">Caderno de aprendizados · Volume 1</p>
-    <h1>O que eu tenho <span>aprendido</span></h1>
-    <p class="sub">frases, pensamentos e perguntas de quem está aprendendo a anotar.</p>
-    <div class="botoes">
-      <a class="btn ler" href="o-que-eu-tenho-aprendido.pdf">Ler online</a>
-      <a class="btn baixar" href="o-que-eu-tenho-aprendido.pdf" download="O-que-eu-tenho-aprendido-Jean-Barbosa.pdf">Baixar PDF</a>
+<div class="wrap">
+  <header>
+    <div class="etiqueta">
+      <small>Cadernos de reflexão</small>
+      <strong>Jean Barbosa</strong>
+      <i></i><i></i>
     </div>
-    <p class="assinatura">Jean Barbosa</p>
-  </section>
-</main>
+    <div>
+      <h1>Três cadernos para quem <em>anota</em></h1>
+      <svg class="onda" viewBox="0 0 140 14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M2 7 Q12 -1 22 7 T42 7 T62 7 T82 7 T102 7 T122 7 T138 7"/></svg>
+      <p class="sub">frases, pensamentos e perguntas de quem está aprendendo a anotar.</p>
+    </div>
+  </header>
+
+  <main class="estante">
+
+    <article class="cartao">
+      <a class="capa-link" href="o-que-eu-tenho-aprendido.pdf" aria-label="Ler online: O que eu tenho aprendido, Volume 1"><div class="capa c1" aria-hidden="true"><i class="furo"></i><i class="furo"></i><i class="furo"></i>
+        <div class="rot"><small>Caderno de aprendizados</small><b>Jean Barbosa</b><i></i><i></i></div>
+        <div class="nota"><small>Volume</small><strong>1</strong>outubro de 2026</div><span class="spark">&#10022;</span><span class="spark p">&#10022;</span>
+        <span class="disco g"></span><span class="disco m"></span>
+        <div class="texto"><div class="tit">O que eu tenho <span>aprendido</span></div><svg class="ond" viewBox="0 0 140 14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M2 7 Q12 -1 22 7 T42 7 T62 7 T82 7 T102 7 T122 7 T138 7"/></svg><div class="leg">frases, pensamentos e perguntas de quem está aprendendo a anotar.</div></div>
+        <div class="rod">Para quem está começando<br>a anotar o que vive</div></div></a>
+      <span class="tag">Volume 1</span>
+      <h2>O que eu tenho <span>aprendido</span></h2>
+      <p>frases, pensamentos e perguntas de quem está aprendendo a anotar.</p>
+      <div class="meta">18 páginas · PDF</div>
+      <div class="botoes">
+        <a class="btn ler" href="o-que-eu-tenho-aprendido.pdf" target="_blank" rel="noopener">Ler online</a>
+        <a class="btn baixar" href="o-que-eu-tenho-aprendido.pdf" download="O-que-eu-tenho-aprendido-Vol-1-Jean-Barbosa.pdf">Baixar PDF</a>
+      </div>
+    </article>
+
+    <article class="cartao">
+      <a class="capa-link" href="anotei-porque-ficou_2.pdf" aria-label="Ler online: Anotei porque ficou"><div class="capa c2" aria-hidden="true"><i class="furo"></i><i class="furo"></i><i class="furo"></i>
+        <div class="rot"><small>Caderno de reflexões</small><b>Jean Barbosa</b><i></i><i></i></div>
+        <div class="nota"><small>Caderno</small>outubro<br>de 2026</div><span class="spark">&#10022;</span><span class="spark p">&#10022;</span>
+        <span class="arco"></span><span class="disco g"></span><span class="furoc"></span>
+        <div class="texto"><div class="tit">Anotei porque <span>ficou</span></div><svg class="ond" viewBox="0 0 140 14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M2 7 Q12 -1 22 7 T42 7 T62 7 T82 7 T102 7 T122 7 T138 7"/></svg><div class="leg">frases que me atravessaram, o que entendi e o que vou fazer com elas.</div></div>
+        <div class="rod">Para quem anota<br>o que atravessa</div></div></a>
+      <span class="tag">Caderno</span>
+      <h2>Anotei porque <span>ficou</span></h2>
+      <p>frases que me atravessaram, o que entendi e o que vou fazer com elas.</p>
+      <div class="meta">17 páginas · PDF</div>
+      <div class="botoes">
+        <a class="btn ler" href="anotei-porque-ficou_2.pdf" target="_blank" rel="noopener">Ler online</a>
+        <a class="btn baixar" href="anotei-porque-ficou_2.pdf" download="Anotei-porque-ficou-Jean-Barbosa.pdf">Baixar PDF</a>
+      </div>
+    </article>
+
+    <article class="cartao">
+      <a class="capa-link" href="o-que-eu-tenho-aprendido-vol3.pdf" aria-label="Ler online: Antes de ser visto, Volume 3"><div class="capa c3" aria-hidden="true"><i class="furo"></i><i class="furo"></i><i class="furo"></i>
+        <div class="rot"><small>Caderno de reflexões</small><b>Jean Barbosa</b><i></i><i></i></div>
+        <div class="nota"><small>Volume</small><strong>3</strong>outubro de 2026</div><span class="spark">&#10022;</span><span class="spark p">&#10022;</span>
+        <span class="arco"></span><span class="disco g"></span><span class="furoc"></span>
+        <div class="texto"><span class="sup">O que eu tenho aprendido · Volume 3</span><div class="tit">Antes de ser <span>visto</span></div><svg class="ond" viewBox="0 0 140 14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M2 7 Q12 -1 22 7 T42 7 T62 7 T82 7 T102 7 T122 7 T138 7"/></svg><div class="leg">reflexões sobre valor, preparo e caráter.</div></div>
+        <div class="rod">Para quem anota<br>o que atravessa</div></div></a>
+      <span class="tag">Volume 3</span>
+      <h2>Antes de ser <span>visto</span></h2>
+      <p>reflexões sobre valor, preparo e caráter.</p>
+      <div class="meta">21 páginas · PDF</div>
+      <div class="botoes">
+        <a class="btn ler" href="o-que-eu-tenho-aprendido-vol3.pdf" target="_blank" rel="noopener">Ler online</a>
+        <a class="btn baixar" href="o-que-eu-tenho-aprendido-vol3.pdf" download="Antes-de-ser-visto-Vol-3-Jean-Barbosa.pdf">Baixar PDF</a>
+      </div>
+    </article>
+
+  </main>
+
+  <footer>
+    <span class="lema">Para quem anota o que atravessa</span>
+    <span class="assina">Jean Barbosa</span>
+  </footer>
+</div>
 </body>
 </html>
